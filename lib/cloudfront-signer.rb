@@ -172,6 +172,8 @@ module AWS
           subject.gsub!(/\s/, "%20")
         end
 
+        subject = URI::encode subject
+
         if policy_options[:policy_file]
           policy = IO.read(policy_options[:policy_file])
           result = "#{subject}#{separator}Policy=#{encode_policy(policy)}&Signature=#{create_signature(policy)}&Key-Pair-Id=#{@key_pair_id}"
